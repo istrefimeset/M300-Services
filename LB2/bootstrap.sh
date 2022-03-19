@@ -9,7 +9,6 @@ COLUMNNAME=Name
 COLUMNVORNAME=Vorname
 
 apt-get update
-apt-get install vim curl build-essential python-software-properties git
 
 debconf-set-selections <<< "mysql-server mysql-server/root_password password $DBPASSWD"
 debconf-set-selections <<< "mysql-server mysql-server/root_password_again password $DBPASSWD"
@@ -23,11 +22,24 @@ debconf-set-selections <<< "phpmyadmin phpmyadmin/reconfigure-webserver multisel
 
 apt-get -y install mysql-server phpmyadmin
 
-mysql -uroot -p$DBPASSWD -e "CREATE DATABASE $DBNAME"
-mysql -uroot -p$DBPASSWD -e "grant all privileges on $DBNAME.* to '$DBUSER'@'%' identified by '$DBPASSWD'"
-mysql -uroot -p$DBPASSWD -e "USE DATABASE KlasseST19d"
-mysql -uroot -p$DBPASSWD -e "CREATE TABLE Schueler(Vorname VARCHAR(50), Nachname VARCHAR(50))"
-mysql -uroot -p$DBPASSWD -e "INSERT INTO Schueler VALUE ("Meset","Istrefi")"
+mysql -uroot -p$DBPASSWD <<%EOF%
+	CREATE USER 'meset'@'localhost' IDENTIFIED BY 'meset';
+	GRANT ALL PRIVILEGES ON *.* TO 'meset'@'localhost' IDENTIFIED BY 'meset' WITH GRANT OPTION;
+	FLUSH PRIVILEGES;
+	CREATE DATABASE KlasseST19d;
+	USE KlasseST19d;
+	CREATE TABLE Schueler(PersonID INT(50), Vorname VARCHAR(50), Name VARCHAR(50), PRIMARY KEY (PersonID));
+	CREATE TABLE Notenbuch (NotenID INT(50), Schulfach VARCHAR(50), Note INT(50), PersonID INT(50), PRIMARY KEY (NotenID), FOREIGN KEY (PersonID) REFERENCES Schueler(PersonID));
+	INSERT INTO Schueler VALUE ("1","Meset","Istrefi");
+	INSERT INTO Schueler VALUE ("2","Benita","Ajdini");
+	INSERT INTO Schueler VALUE ("3","Mark","Zgraggen");
+	INSERT INTO Schueler VALUE ("4","Sam","Jassim");
+	INSERT INTO Notenbuch VALUE ("1","LB1", "5", "1" );
+	INSERT INTO Notenbuch VALUE ("2","LB1", "6", "2" );
+	INSERT INTO Notenbuch VALUE ("3","LB1", "5.5", "3" );
+	INSERT INTO Notenbuch VALUE ("4","LB1", "5.5", "4" );
+	quit
+%EOF%	
 
 cd /vagrant
 
@@ -38,15 +50,5 @@ sudo sed -i "s/.*bind-address.*/bind-address = 0.0.0.0/" /etc/mysql/mysql.conf.d
 sudo service mysql restart
 
 # setup phpmyadmin
-
-apt-get -y install php apache2 libapache2-mod-php php-curl php-gd php-mysql php-gettext a2enmod rewrite
-
-sed -i "s/AllowOverride None/AllowOverride All/g" /etc/apache2/apache2.conf
-
-rm -rf /var/www/html
-ln -fs /vagrant/public /var/www/html
-
-sed -i "s/error_reporting = .*/error_reporting = E_ALL/" /etc/php/7.0/apache2/php.ini
-sed -i "s/display_errors = .*/display_errors = On/" /etc/php/7.0/apache2/php.ini
 
 service apache2 restart
