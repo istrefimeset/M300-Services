@@ -29,7 +29,7 @@ mysql -uroot -p$DBPASSWD <<%EOF%
 	CREATE DATABASE KlasseST19d;
 	USE KlasseST19d;
 	CREATE TABLE Schueler(PersonID INT(50), Vorname VARCHAR(50), Name VARCHAR(50), PRIMARY KEY (PersonID));
-	CREATE TABLE Notenbuch (NotenID INT(50), Schulfach VARCHAR(50), Note INT(50), PersonID INT(50), PRIMARY KEY (NotenID), FOREIGN KEY (PersonID) REFERENCES Schueler(PersonID));
+	CREATE TABLE Notenbuch (NotenID INT(50), Schulfach VARCHAR(50), Note VARCHAR(50), PersonID INT(50), PRIMARY KEY (NotenID), FOREIGN KEY (PersonID) REFERENCES Schueler(PersonID));
 	INSERT INTO Schueler VALUE ("1","Meset","Istrefi");
 	INSERT INTO Schueler VALUE ("2","Benita","Ajdini");
 	INSERT INTO Schueler VALUE ("3","Mark","Zgraggen");
