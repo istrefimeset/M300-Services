@@ -1,9 +1,12 @@
 #!/usr/bin/env bash
 
 DBHOST=localhost
-DBNAME=dbname
-DBUSER=dbuser
-DBPASSWD=userpass
+DBNAME=KlasseST19d
+DBUSER=meset	
+DBPASSWD=meset
+DBTSCHUELER=Schueler
+COLUMNNAME=Name
+COLUMNVORNAME=Vorname
 
 apt-get update
 apt-get install vim curl build-essential python-software-properties git
@@ -22,6 +25,9 @@ apt-get -y install mysql-server phpmyadmin
 
 mysql -uroot -p$DBPASSWD -e "CREATE DATABASE $DBNAME"
 mysql -uroot -p$DBPASSWD -e "grant all privileges on $DBNAME.* to '$DBUSER'@'%' identified by '$DBPASSWD'"
+mysql -uroot -p$DBPASSWD -e "USE DATABASE KlasseST19d"
+mysql -uroot -p$DBPASSWD -e "CREATE TABLE Schueler(Vorname VARCHAR(50), Nachname VARCHAR(50))"
+mysql -uroot -p$DBPASSWD -e "INSERT INTO Schueler VALUE ("Meset","Istrefi")"
 
 cd /vagrant
 
