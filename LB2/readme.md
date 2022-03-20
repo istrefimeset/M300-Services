@@ -51,8 +51,7 @@ Im Abschnitt der Netzwerkkonfiguration wurden die Ports zum Portforwarding defin
         'modifyvm', :id,
         '--natdnshostresolver1', 'on',
         '--memory', '1024',
-        '--cpus', '2'
-    ] 
+        '--cpus', '2'    ] 
   end
 end  
 
