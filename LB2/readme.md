@@ -42,7 +42,21 @@ Das IaC ist so aufgebaut, dass im Vagrantfile die Grundlegende Infrastruktur auf
     end
 
 In diesem Teil des Skriptes wird das OS definiert, welches auf der VM installiert werden soll.
-Im Abschnitt der Netzwerkkonfiguration wurden die Ports zum Portforwarding definiert, damit der Benutzer auf das Webinterface von phpmyadmin lokal zugreifen. Mit ==db.vm.provision== wurde noch das bootstrap weitergeleitet, damit dies bei der Ausführung vom Vagrantfile mit bezogen wird.
+Im Abschnitt der Netzwerkkonfiguration wurden die Ports zum Portforwarding definiert, damit der Benutzer auf das Webinterface von phpmyadmin lokal zugreifen. Mit `db.vm.provision` wurde noch das bootstrap weitergeleitet, damit dies bei der Ausführung vom Vagrantfile mit bezogen wird.
+
+>
+    # VM performance config
+     config.vm.provider :virtualbox do |vb|
+        vb.customize [
+        'modifyvm', :id,
+        '--natdnshostresolver1', 'on',
+        '--memory', '1024',
+        '--cpus', '2'
+    ] 
+  end
+end  
+
+Hier wird definiert auf welcher Virtualisierungssoftware die VM laufen wird und auch die Performance wird angepasst.
 
 ## Boostrap Inhalt
 
