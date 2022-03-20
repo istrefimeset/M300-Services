@@ -28,7 +28,8 @@ Das IaC ist so aufgebaut, dass im Vagrantfile die Grundlegende Infrastruktur auf
 
 ## Vagrantfile Inhalt
 
-> Vagrant.configure(2) do |config|
+>
+ Vagrant.configure(2) do |config|
 
     # OS for VM
     config.vm.box = "ubuntu/xenial64"
@@ -39,6 +40,9 @@ Das IaC ist so aufgebaut, dass im Vagrantfile die Grundlegende Infrastruktur auf
         db.vm.network "forwarded_port", guest: 80, host: 3306
         db.vm.provision "shell", path: "bootstrap.sh"
     end
+
+In diesem Teil des Skriptes wird das OS definiert, welches auf der VM installiert werden soll.
+Im Abschnitt der Netzwerkkonfiguration wurden die Ports zum Portforwarding definiert, damit der Benutzer auf das Webinterface von phpmyadmin lokal zugreifen. Mit == db.vm.provision == wurde noch das bootstrap weitergeleitet, damit dies bei der Ausführung vom Vagrantfile mit bezogen wird.
 
 ## Boostrap Inhalt
 
