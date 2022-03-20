@@ -26,5 +26,22 @@ Ich habe mich dafür entschieden eine Virtuelle Umgebung mit Hilfe von Vagrant z
 ### Codebeschreibung
 Das IaC ist so aufgebaut, dass im Vagrantfile die Grundlegende Infrastruktur aufgebaut wird (Betriebssystem, Hardware, Netzwerkonfiguration, etc.) und im bootstrap.sh File werden die Services eingerichtet, welche auf der VM eingerichtet werden. 
 
+## Vagrantfile Inhalt
+
+> Vagrant.configure(2) do |config|
+
+    # OS for VM
+    config.vm.box = "ubuntu/xenial64"
+
+    # VM network config
+    config.vm.define "db-server" do |db|
+        db.vm.network "forwarded_port", guest: 3306, host: 3306
+        db.vm.network "forwarded_port", guest: 80, host: 3306
+        db.vm.provision "shell", path: "bootstrap.sh"
+    end
+
+## Boostrap Inhalt
+
+
 
 

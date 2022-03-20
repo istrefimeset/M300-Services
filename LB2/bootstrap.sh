@@ -9,9 +9,10 @@ DBTSCHUELER=Schueler
 TABLE1=Schueler
 TABLE2=Notenbuch
 
-
+# all packages getting updated
 apt-get update
 
+# set up mysql and phpmyadmin with password and connect with db
 debconf-set-selections <<< "mysql-server mysql-server/root_password password $DBPASSWD"
 debconf-set-selections <<< "mysql-server mysql-server/root_password_again password $DBPASSWD"
 debconf-set-selections <<< "phpmyadmin phpmyadmin/dbconfig-install boolean true"
@@ -46,7 +47,6 @@ mysql -uroot -p$DBPASSWD <<%EOF%
 cd /vagrant
 
 # update mysql conf file to allow remote access to the db
-
 sudo sed -i "s/.*bind-address.*/bind-address = 0.0.0.0/" /etc/mysql/mysql.conf.d/mysqld.cnf
 
 sudo service mysql restart
