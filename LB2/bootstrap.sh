@@ -3,8 +3,8 @@
 # variable for db
 DBHOST=localhost
 DBNAME=KlasseST19d
-DBUSER=	
-DBPASSWD=meset
+DBUSER=modul
+DBPASSWD=modul
 DBTSCHUELER=Schueler
 TABLE1=Schueler
 TABLE2=Notenbuch

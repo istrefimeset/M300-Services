@@ -4,13 +4,27 @@
 # Inhaltsverzeichnis
 
 - [Einführung](#Einführung)
+- [Umgebung](#Umgebung)
 
-## Einführung
+
+# Einführung
 ### Projekt Einleitung
 Ziel in dieser Leistungsbeurteilung ist es mit VirtualBox/Vagrant eine IaC (Infrastucture as Code) zu erstellen, indem ein Service oder ein Servicedienst automatisiert wird. Die Infrastruktur ist frei wählbar.
 
 ### Projekt
-Ich habe mich dafür entschieden eine Virtuelle Umgebung mit Hilfe von Vagrant zu erstellen, auf der ein MYSQL-Server läuft, der über phpmyadmin auf die Datenbanken zugreifen kann. Indem Apache2 gestartet wird, kann auf der Weboberfläche zugegriffen werden.
+Ich habe mich dafür entschieden eine Virtuelle Umgebung mit Hilfe von Vagrant zu erstellen, auf der ein MYSQL-Server läuft, der über phpmyadmin auf die Datenbanken zugreifen kann. Indem Apache2 gestartet wird, kann auf der Weboberfläche zugegriffen werden. 
+
+# Umgebung
+### Virtuelle Maschine
+
+#### MYSQL-Server:
+- OS: ubuntu/xenial64
+- CPU: 2 Core
+- Memory: 1024
+- Access: 127.0.0.1:3306
+
+### Codebeschreibung
+Das IaC ist so aufgebaut, dass im Vagrantfile die Grundlegende Infrastruktur aufgebaut wird (Betriebssystem, Hardware, Netzwerkonfiguration, etc.) und im bootstrap.sh File werden die Services eingerichtet, welche auf der VM eingerichtet werden. 
 
 
 
