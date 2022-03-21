@@ -5,7 +5,10 @@
 
 - [Einführung](#Einführung)
 - [Umgebung](#Umgebung)
-
+    - [Maschine](#virtuelle-maschine)
+    - [Vagrantfile](#vagrantfile-inhalt)
+    - [Boostrapfile](#boostrap-inhalt)
+- [Umsetzung](#umgebung-umsetzten)
 
 # Einführung
 ### Projekt Einleitung
@@ -15,7 +18,7 @@ Ziel in dieser Leistungsbeurteilung ist es mit VirtualBox/Vagrant eine IaC (Infr
 Ich habe mich dafür entschieden eine Virtuelle Umgebung mit Hilfe von Vagrant zu erstellen, auf der ein MYSQL-Server läuft, der über phpmyadmin auf die Datenbanken zugreifen kann. Indem Apache2 gestartet wird, kann auf der Weboberfläche zugegriffen werden. 
 
 # Umgebung
-### Virtuelle Maschine
+## Virtuelle Maschine
 
 ![virtuelle Umgebung](Umgebung.png)
 
@@ -88,6 +91,8 @@ Am Anfang des Skriptes wurden noch die Variabeln definiert. Diese dienen dazu da
     debconf-set-selections <<< "phpmyadmin phpmyadmin/mysql/app-pass password $DBPASSWD"
     debconf-set-selections <<< "phpmyadmin phpmyadmin/reconfigure-webserver multiselect none"
 
+Mit `apt-get update` werden zu erst die Packages auf dem neusten Stand gesetzt.
+Im Abschnitt `debconf-set-selections` werden die Passwörter gesetzt, bzw. der Root-User wird konfiguriert und das Passwort wird gesetzt für die Datenbank.
 
 > 
     # install mysql and admin interface
@@ -113,6 +118,7 @@ Am Anfang des Skriptes wurden noch die Variabeln definiert. Diese dienen dazu da
 	    quit
     %EOF%	
 
+Im folgendem Abschnitt wird der MYSQL-Server und phpmyadmin installiert. Nachdem dies fertig installiert wurde loggt sich das Skript im DB-Server ein (`mysql -uroot -p$DBPASSWD <<%EOF%`) und erstellt eine Datenbank. In der Dantenbank werden noch Tabellen erstellt und auch ihre Relationen werden definiert (mit Primär- und Fremdschlüssel). Zu dem werden noch einige Daten festgehalten, damit man die Realtion auch gut erkenne kann. 
 
 >
     # update mysql conf file to allow remote access to the db
@@ -124,12 +130,15 @@ Am Anfang des Skriptes wurden noch die Variabeln definiert. Diese dienen dazu da
 
     service apache2 restart
 
+Zum Schluss wird noch der Remote-Zugriff aktiviert zur Datenbank. 
+Damit das auch sicherlich umgesetzt wurde, wird noch mysql und apache2 neugestartet.
 
+# Umgebung umsetzten
 
+### Anleitung
+1. Das Repository soll auf vom git auf dem lokalen Rechner geclonet werden mit folgendem Befehl: git clone (URL)
+2. Auf dem git bash `vagrant up` ausführen
+3. Nachdem das Skript durchgeführt wurde auf dem Browser `127.0.0.1:3306/phpmyadmin` eingeben
+4. Mit Passwort und Benutzernamen einloggen(Passwort und Benutzername wurde beides `modul` gesetzt)
 
-# Anwendung
-
-### Zugriff auf phpmyadmin
-1. Im Browser kann man unter folgender IP auf die Maschine zugreifen: 127.0.0.1:3306/phpmyadmin
-2. Benutzername und Passwort eingeben: beides ist im boostrap.sh definiert
-3. 
+Danach sollte die Datenbank `KlasseST19d` zu sehen sein.
