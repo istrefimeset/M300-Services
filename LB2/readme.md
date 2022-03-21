@@ -23,7 +23,7 @@ Ich habe mich dafür entschieden eine Virtuelle Umgebung mit Hilfe von Vagrant z
 # Umgebung
 ## Virtuelle Maschine
 
-![virtuelle Umgebung](images/Umgebung.png)
+![virtuelle Umgebung](/Images/Umgebung.png)
 
 #### MYSQL-Server:
 - OS: ubuntu/xenial64
@@ -146,7 +146,7 @@ Damit das auch sicherlich umgesetzt wurde, wird noch mysql und apache2 neugestar
 
 Danach sollte die Datenbank `KlasseST19d` zu sehen sein.
 
-![phpmyadmin](images/phpmyadmin.png)
+![phpmyadmin](/Images/phpmyadmin.png)
 
 ### Testen
 
