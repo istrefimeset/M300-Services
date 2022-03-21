@@ -37,7 +37,7 @@ Das IaC ist so aufgebaut, dass im Vagrantfile die Grundlegende Infrastruktur auf
 ## Vagrantfile Inhalt
 
 >
- Vagrant.configure(2) do |config|
+    Vagrant.configure(2) do |config|
 
     # OS for VM
     config.vm.box = "ubuntu/xenial64"
