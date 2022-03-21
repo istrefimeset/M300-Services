@@ -9,6 +9,9 @@
     - [Vagrantfile](#vagrantfile-inhalt)
     - [Boostrapfile](#boostrap-inhalt)
 - [Umsetzung](#umgebung-umsetzten)
+    - [Anleitung](#anleitung)
+    - [Testen](#testen) 
+- [Quellenverzeichnis](#quellenverzeichnis)
 
 # Einführung
 ### Projekt Einleitung
@@ -20,7 +23,7 @@ Ich habe mich dafür entschieden eine Virtuelle Umgebung mit Hilfe von Vagrant z
 # Umgebung
 ## Virtuelle Maschine
 
-![virtuelle Umgebung](Umgebung.png)
+![virtuelle Umgebung](images/Umgebung.png)
 
 #### MYSQL-Server:
 - OS: ubuntu/xenial64
@@ -136,9 +139,28 @@ Damit das auch sicherlich umgesetzt wurde, wird noch mysql und apache2 neugestar
 # Umgebung umsetzten
 
 ### Anleitung
-1. Das Repository soll auf vom git auf dem lokalen Rechner geclonet werden mit folgendem Befehl: git clone (URL)
+1. Das Repository soll auf vom git auf dem lokalen Rechner geklont werden mit folgendem Befehl: git clone (URL)
 2. Auf dem git bash `vagrant up` ausführen
 3. Nachdem das Skript durchgeführt wurde auf dem Browser `127.0.0.1:3306/phpmyadmin` eingeben
 4. Mit Passwort und Benutzernamen einloggen(Passwort und Benutzername wurde beides `modul` gesetzt)
 
 Danach sollte die Datenbank `KlasseST19d` zu sehen sein.
+
+![phpmyadmin](images/phpmyadmin.png)
+
+### Testen
+
+Folgende Tests müssen durchgeführt werden für die Richtigkeit der Installation:
+
+- [ ] clonen war erfolgreich
+- [ ] vagrant up kann fehlerfrei durchgeführt werden
+- [ ] auf `127.0.0.1:3306/phpmyadmin` kann zugegriffen werden
+- [ ] Zugriff zu phpmyadmin funktioniert mit folgenen Logindaten: root;modul und modul;modul
+- [ ] Datenbank **KlasseST19d** ist vorhanden
+- [ ] Tabelle **Schueler** und **Notenbuch** ist vorhanden
+- [ ] Einträge in den beiden Tabellen sind vorhanden
+- [ ] Relation der Tabellen ist erkennbar (durch der zugewiesenen ID-Attribute)
+
+# Quellenverzeichnis
+
+Projekt Idee: [MYSQL-Server-vagrant](https://www.yourtechy.com/technology/mysql-server-vagrant-virtualbox/)
