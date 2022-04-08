@@ -12,6 +12,7 @@
     - [Anleitung](#anleitung)
     - [Testen](#testen) 
 - [Quellenverzeichnis](#quellenverzeichnis)
+- [Zusammenarbeit](#zusammenarbeit)
 
 # Einführung
 ### Projekt Einleitung
@@ -164,3 +165,7 @@ Folgende Tests müssen durchgeführt werden für die Richtigkeit der Installatio
 # Quellenverzeichnis
 
 Projekt Idee: [MYSQL-Server-vagrant](https://www.yourtechy.com/technology/mysql-server-vagrant-virtualbox/)
+
+# Zusammenarbeit 
+Partner: Benita Ajdini, Mark Zgraggen
+auch noch geholfen: Luca Blatter(ST19c)
