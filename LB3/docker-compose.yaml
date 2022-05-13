@@ -4,12 +4,17 @@ services:
   # Database
   db:
     image: mysql:latest
-    mem_limit: 1024M
-    mem_reservation: 256M
-    cpus: 1
     volumes:
       - db_data:/var/lib/mysql
     restart: always
+    deploy:
+        resources:
+            limits:
+              cpus: '1'
+              memory: 1024M
+            reservations:
+              cpus: '0.5'
+              memory: 512M     
     environment:
       MYSQL_ROOT_PASSWORD: M300
       MYSQL_DATABASE: wordpress
@@ -22,11 +27,16 @@ services:
   phpmyadmin:
     depends_on:
       - db
-    image: phpmyadmin/phpmyadmin
-    mem_limit: 1024M
-    mem_reservation: 1024M
-    cpus: 1   
+    image: phpmyadmin:latest
     restart: always
+    deploy:
+        resources:
+            limits:
+              cpus: '1'
+              memory: 1024M
+            reservations:
+              cpus: '0.5'
+              memory: 512M           
     ports:
       - '3306:80'
     environment:
@@ -40,17 +50,22 @@ services:
     depends_on:
       - db
     image: wordpress:latest
-    mem_limit: 1024M
-    mem_reservation: 256M
-    cpus: 1
     ports:
       - '8081:80'
     restart: always
-    volumes: ['./:/var/www/html']
+    deploy:
+        resources:
+            limits:
+              cpus: '1'
+              memory: 1024M
+            reservations:
+              cpus: '0.5'
+              memory: 512M       
     environment:
       WORDPRESS_DB_HOST: db:3306
-      WORDPRESS_DB_USER: wordpress
-      WORDPRESS_DB_PASSWORD: wordpress
+      WORDPRESS_DB_USER: mysql
+      WORDPRESS_DB_PASSWORD: mysql
+    volumes: ['./:/var/www/html']
     networks:
       - wpsite
 networks:
