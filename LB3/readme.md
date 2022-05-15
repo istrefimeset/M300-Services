@@ -45,10 +45,11 @@ Ich habe mich dafür entschieden mit einem Docker-Compose File eine Abhängigkei
 ## Codebeschreibung
 ### MYSQL Code
 >
+
 version: '3'
 
 services:
-  # Database
+    # Database
   db:
     image: mysql:latest
     volumes:
@@ -75,7 +76,7 @@ Im Deploy Teil wurden noch die Hardware konfiguriert, also das Limit an Hardware
 
 ### Phpmyadmin Code
 >
-  # phpmyadmin
+    # phpmyadmin
   phpmyadmin:
     depends_on:
       - db
@@ -101,7 +102,7 @@ Am Anfang des Codes wird bei `depends_on` definiert, dass dieser Container vom C
 
 ### Wordpress Code
 >
-  # Wordpress
+    # Wordpress
   wordpress:
     depends_on:
       - db
@@ -129,7 +130,7 @@ networks:
 volumes:
   db_data:
 
-Hier ist alles ebenfalls ähmlich wie bei den vorherigen beiden Codes. Das Environment hängt hier jedoch von der Datenbank ab, deshalb muss man hier die Login Daten angeben, damit der Wordpress Container zugriff auf dem Datenbank Container hat.
+Hier ist alles ebenfalls ähmlich wie bei den vorherigen beiden Codes. Das Environment hängt hier jedoch von der Datenbank ab, deshalb muss man hier die Login Daten angeben, damit der Wordpress Container zugriff auf dem Datenbank Container
 
 
 
