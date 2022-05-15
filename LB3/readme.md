@@ -165,10 +165,10 @@ Hier ist alles ebenfalls ähmlich wie bei den vorherigen beiden Codes. Das Envir
 - [ ] Zugriff zu Wordpress klappt
 - [ ] WP Daten werden gespeichert auf Datenbank
 
-![db] (https://github.com/istrefimeset/M300-Services/blob/main/LB3/Images/db.png)
+![db](https://github.com/istrefimeset/M300-Services/blob/main/LB3/Images/db.png)
 
 
-![wpadmin] (https://github.com/istrefimeset/M300-Services/blob/main/LB3/Images/wpadmin.png)
+![wpadmin](https://github.com/istrefimeset/M300-Services/blob/main/LB3/Images/wpadmin.png)
 
 # Quelleverzeichnis
 Projekt Idee: [Wordpress-Phpmyadmin](https://docs.docker.com/samples/wordpress/)
