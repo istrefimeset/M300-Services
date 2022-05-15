@@ -107,33 +107,33 @@ Am Anfang des Codes wird bei `depends_on` definiert, dass dieser Container vom C
 
 >
 
-    #Wordpress
-  wordpress:
-    depends_on:
-      - db
-    image: wordpress:latest
-    ports:
-      - '8081:80'
-    restart: always
-    deploy:
-        resources:
-            limits:
-              cpus: '1'
-              memory: 1024M
-            reservations:
-              cpus: '0.5'
-              memory: 512M       
-    environment:
-      WORDPRESS_DB_HOST: db:3306
-      WORDPRESS_DB_USER: mysql
-      WORDPRESS_DB_PASSWORD: mysql
-    volumes: ['./:/var/www/html']
+        #Wordpress
+     wordpress:
+       depends_on:
+        - db
+      image: wordpress:latest
+      ports:
+       - '8081:80'
+      restart: always
+     deploy:
+         resources:
+             limits:
+                cpus: '1'
+               memory: 1024M
+                reservations:
+                  cpus: '0.5'
+                  memory: 512M       
+        environment:
+          WORDPRESS_DB_HOST: db:3306
+          WORDPRESS_DB_USER: mysql
+          WORDPRESS_DB_PASSWORD: mysql
+        volumes: ['./:/var/www/html']
+        networks:
+          - wpsite
     networks:
-      - wpsite
-networks:
-  wpsite:
-volumes:
-  db_data:
+      wpsite:
+    volumes:
+      db_data:
 
 Hier ist alles ebenfalls ähmlich wie bei den vorherigen beiden Codes. Das Environment hängt hier jedoch von der Datenbank ab, deshalb muss man hier die Login Daten angeben, damit der Wordpress Container zugriff auf dem Datenbank Container
 
