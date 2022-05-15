@@ -138,8 +138,32 @@ Am Anfang des Codes wird bei `depends_on` definiert, dass dieser Container vom C
 Hier ist alles ebenfalls ähmlich wie bei den vorherigen beiden Codes. Das Environment hängt hier jedoch von der Datenbank ab, deshalb muss man hier die Login Daten angeben, damit der Wordpress Container zugriff auf dem Datenbank Container
 
 
+# Umgebung umsetzten
+
+### Anleitung
+1. Das Repository soll auf vom git auf dem lokalen Rechner geklont werden mit folgendem Befehl: git clone (URL)
+2. YAML-File bei gleichen Pfad wie Vagrantfile speichern (oder einfach YAML-File in VM inportieren)
+3. Auf Linux Pfad wechseln auf der sich das YAML-File befindet
+4. `docker-compose up -d` ausführen
+5. Mit `docker ps -a` kontrollieren, ob Container erstellt wurden
+6. auf Lokalen Browser `localhost:3306` und  `localhost:8081` testen
+7. Mit Login Daten sich versuchen anzumelden
 
 
+### Testen
 
+- [ ] clonen war erfolgreich
+- [ ] `docker-compose up -d` hat erfolgreich geklappt
+- [ ] Zugriff zu Phpmyadmin klappt
+- [ ] Zugriff zu Wordpress klappt
+- [ ] WP Daten werden gespeichert auf Datenbank
 
+![db] ()
+![wpadmin] ()
+
+# Quelleverzeichnis
+Projekt Idee: [Wordpress-Phpmyadmin](https://docs.docker.com/samples/wordpress/)
+
+# Zusammenarbeit
+Benita Ajdini
 
