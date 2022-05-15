@@ -47,30 +47,30 @@ Ich habe mich dafür entschieden mit einem Docker-Compose File eine Abhängigkei
 
 >
 
-version: '3'
+    version: '3'
 
-services:
-    #Database
-  db:
-    image: mysql:latest
-    volumes:
-      - db_data:/var/lib/mysql
-    restart: always
-    deploy:
-        resources:
-            limits:
-              cpus: '1'
-              memory: 1024M
-            reservations:
-              cpus: '0.5'
-              memory: 512M     
-    environment:
-      MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: wordpress
-      MYSQL_USER: mysql
-      MYSQL_PASSWORD: mysql
-    networks:
-      - wpsite
+    services:
+        #Database
+      db:
+       image: mysql:latest
+        volumes:
+          - db_data:/var/lib/mysql
+        restart: always
+        deploy:
+            resources:
+                limits:
+                  cpus: '1'
+                  memory: 1024M
+                reservations:
+                  cpus: '0.5'
+                  memory: 512M     
+        environment:
+          MYSQL_ROOT_PASSWORD: password
+          MYSQL_DATABASE: wordpress
+          MYSQL_USER: mysql
+          MYSQL_PASSWORD: mysql
+        networks:
+          - wpsite
 
 In diesem Teil des Codes wurde die Datenbank konfiguriert. Hier wurde das letzte Image von mysql bezogen und das Volumen wird im Pfad `/var/lib/mysql` bespeichert.
 Im Deploy Teil wurden noch die Hardware konfiguriert, also das Limit an Hardware und die minimale Reservation für den Container. Beim Environment Teil wurden noch Benutzername und Passwörter gesetzt für einen Benutzer mit und ohne Adminrechte. 
@@ -79,27 +79,27 @@ Im Deploy Teil wurden noch die Hardware konfiguriert, also das Limit an Hardware
 
 >
 
-    #phpmyadmin
-  phpmyadmin:
-    depends_on:
-      - db
-    image: phpmyadmin:latest
-    restart: always
-    deploy:
-        resources:
-            limits:
-              cpus: '1'
-              memory: 1024M
-            reservations:
-              cpus: '0.5'
-              memory: 512M           
-    ports:
-      - '3306:80'
-    environment:
-      PMA_HOST: db
-      MYSQL_ROOT_PASSWORD: password 
-    networks:
-      - wpsite
+        #phpmyadmin
+      phpmyadmin:
+        depends_on:
+          - db
+        image: phpmyadmin:latest
+        restart: always
+        deploy:
+            resources:
+                limits:
+                  cpus: '1'
+                  memory: 1024M
+                reservations:
+                  cpus: '0.5'
+                  memory: 512M           
+        ports:
+          - '3306:80'
+        environment:
+          PMA_HOST: db
+          MYSQL_ROOT_PASSWORD: password 
+        networks:
+          - wpsite
 
 Am Anfang des Codes wird bei `depends_on` definiert, dass dieser Container vom Container `db` abhängt. Auch hier wird das zu letzt realeste Image von phpmyadmin verwendet. Hier wurde die Hardware ebenfalls wie beim Mysql Container definiert. 
 
