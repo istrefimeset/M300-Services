@@ -44,8 +44,8 @@ Ich habe mich dafür entschieden mit einem Docker-Compose File eine Abhängigkei
 
 ## Codebeschreibung
 ### MYSQL Code
->
 
+>
 version: '3'
 
 services:
@@ -75,6 +75,7 @@ In diesem Teil des Codes wurde die Datenbank konfiguriert. Hier wurde das letzte
 Im Deploy Teil wurden noch die Hardware konfiguriert, also das Limit an Hardware und die minimale Reservation für den Container. Beim Environment Teil wurden noch Benutzername und Passwörter gesetzt für einen Benutzer mit und ohne Adminrechte. 
 
 ### Phpmyadmin Code
+
 >
     # phpmyadmin
   phpmyadmin:
@@ -101,6 +102,7 @@ Im Deploy Teil wurden noch die Hardware konfiguriert, also das Limit an Hardware
 Am Anfang des Codes wird bei `depends_on` definiert, dass dieser Container vom Container `db` abhängt. Auch hier wird das zu letzt realeste Image von phpmyadmin verwendet. Hier wurde die Hardware ebenfalls wie beim Mysql Container definiert. 
 
 ### Wordpress Code
+
 >
     # Wordpress
   wordpress:
