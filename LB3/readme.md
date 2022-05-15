@@ -20,10 +20,13 @@ In den letzten Wochen vom Modul 300 - Plattformübergreifende Dienste im Netzwer
 
 ## Auftrag
 In der Leistungsbeurteilung 3 wird uns frei gestellt, ob wir mit Docker oder mit Kubernetes unser Projekt erarbeiten wollen. 
-Da ich mich mit beiden gut auskenne, fiel mir die Entscheidung leicht und habe mich dafür entschlossen ein Docker-Compose File zu erstellen.
+Da ich mich mit beiden gut auskenne von der Arbeit, fiel mir die Entscheidung leicht und habe mich dafür entschlossen ein Docker-Compose File zu erstellen.
 
 ## Projekt Thema
-Ich habe mich dafür entschieden mit einem Docker-Compose File eine Abhängigkeit zwischen MYSQL und Phpmyadmin zu erstellen, so dass wenn man sich auf dem Webinterface von Phpmyadmin einloggt, eine Datenbank zu sehen ist. Ausserdem wird noch ein Wordpress Container konfiguriert und in Betrieb genommen. 
+Ich habe mich dafür entschieden mit einem Docker-Compose File eine Abhängigkeit zwischen MYSQL und Phpmyadmin zu erstellen, so dass wenn man sich auf dem Webinterface von Phpmyadmin einloggt, eine Datenbank zu sehen ist. Ausserdem wird noch ein Wordpress Container konfiguriert und in Betrieb genommen, welches die Daten auf dem Mysql Container speichert. 
+
+## Docker
+Docker verwendet Container als isolierte Umgebungen im Benutzerraum, die auf Betriebssystemebene ausgeführt werden und das Dateisystem sowie die Systemressourcen gemeinsam nutzen. Docker ist Opensource und wird meist auf Linux-Systemen verwendet.
 
 # Umgebung
 ## virtuelle Umgebung
@@ -80,7 +83,7 @@ Ich habe mich dafür entschieden mit einem Docker-Compose File eine Abhängigkei
           - wpsite
 
 In diesem Teil des Codes wurde die Datenbank konfiguriert. Hier wurde das letzte Image von mysql bezogen und das Volumen wird im Pfad `/var/lib/mysql` bespeichert.
-Im Deploy Teil wurden noch die Hardware konfiguriert, also das Limit an Hardware und die minimale Reservation für den Container. Beim Environment Teil wurden noch Benutzername und Passwörter gesetzt für einen Benutzer mit und ohne Adminrechte. 
+Im Deploy Teil wurden noch die Hardware konfiguriert, also das Limit an Hardware und die minimale Reservation für den Container. Beim Environment Teil wurden noch Benutzernamen und Passwörter gesetzt für einen Benutzer mit und ohne Adminrechte. 
 
 ### Phpmyadmin Code
 
@@ -108,7 +111,7 @@ Im Deploy Teil wurden noch die Hardware konfiguriert, also das Limit an Hardware
         networks:
           - wpsite
 
-Am Anfang des Codes wird bei `depends_on` definiert, dass dieser Container vom Container `db` abhängt. Auch hier wird das zu letzt realeste Image von phpmyadmin verwendet. Hier wurde die Hardware ebenfalls wie beim Mysql Container definiert. 
+Am Anfang des Codes wird bei `depends_on` definiert, dass dieser Container vom Container `db` abhängt. Auch hier wird das zuletzt veröffentlichte Image von phpmyadmin verwendet. Hier wurde die Hardware ebenfalls wie beim Mysql Container definiert. 
 
 ### Wordpress Code
 
@@ -142,15 +145,15 @@ Am Anfang des Codes wird bei `depends_on` definiert, dass dieser Container vom C
     volumes:
       db_data:
 
-Hier ist alles ebenfalls ähmlich wie bei den vorherigen beiden Codes. Das Environment hängt hier jedoch von der Datenbank ab, deshalb muss man hier die Login Daten angeben, damit der Wordpress Container zugriff auf dem Datenbank Container
+Hier ist alles ebenfalls ähnlich wie bei den vorherigen beiden Codes. Das Environment hängt hier jedoch von der Datenbank ab, deshalb muss man hier die Login Daten angeben, damit der Wordpress Container zugriff auf dem Datenbank Container
 
 
 # Umgebung umsetzten
 
 ### Anleitung
 1. Das Repository soll auf vom git auf dem lokalen Rechner geklont werden mit folgendem Befehl: git clone (URL)
-2. YAML-File bei gleichen Pfad wie Vagrantfile speichern (oder einfach YAML-File in VM inportieren)
-3. Auf Linux Pfad wechseln auf der sich das YAML-File befindet
+2. YAML-File bei gleichen Pfad wie Vagrantfile speichern (oder einfach YAML-File in VM importieren)
+3. Auf Linux Pfad wechseln, auf der sich das YAML-File befindet
 4. `docker-compose up -d` ausführen
 5. Mit `docker ps -a` kontrollieren, ob Container erstellt wurden
 6. auf Lokalen Browser `localhost:3306` und  `localhost:8081` testen
